@@ -86,6 +86,10 @@ build: off
 
 test_script:
   - "%CMD_IN_ENV% python setup.py build"
+  - ps: |
+      if ($Env:PYTHON_VERSION.StartsWith("3.8")) {
+        "%CMD_IN_ENV% python setup.py install"
+      }
   - "%CMD_IN_ENV% python test.py"
   - ps: |
       if (Test-Path env:HIREDIS_PY_BUILDWHEELS) {
